@@ -1,3 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-mono: "Space Mono", monospace;
+
+  --color-neutral-900: #141D2F;
+  --color-neutral-800: #1E2A47;
+  --color-neutral-700: #2B3442;
+  --color-neutral-500: #4B6A9B;
+  --color-neutral-300: #697C9A;
+  --color-neutral-200: #90A4D4;
+  --color-neutral-100: #F6F8FF;
+  --color-neutral-0: #FFFFFF;
+
+  --color-blue-300: #60ABFF;
+  --color-blue-500: #0079FF;
+
+  --color-red-500: #F74646;
+}
+
+body {
+  font-family: var(--font-mono);
+  margin: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
