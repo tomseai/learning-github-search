@@ -18,11 +18,31 @@ export interface GitHubUser {
   created_at: string;
 }
 
+export interface GitHubRepo {
+  id: number;
+  name: string;
+  html_url: string;
+  description: string | null;
+  stargazers_count: number;
+  language: string | null;
+  updated_at: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class GitHubService {
   private http = inject(HttpClient);
 
   getUser(username: string): Observable<GitHubUser> {
     return this.http.get<GitHubUser>(`https://api.github.com/users/${username}`);
+  }
+
+  getAuthenticatedUser(): Observable<GitHubUser> {
+    return this.http.get<GitHubUser>('https://api.github.com/user');
+  }
+
+  getUserRepos(): Observable<GitHubRepo[]> {
+    return this.http.get<GitHubRepo[]>(
+      'https://api.github.com/user/repos?sort=updated&per_page=10&type=public'
+    );
   }
 }
