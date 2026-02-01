@@ -1,59 +1,67 @@
-# LearningGithubSearch
+# DevFinder
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+Angular 21 app for searching GitHub users and viewing your own repositories via GitHub OAuth login.
 
-## Development server
+## Prerequisites
 
-To start a local development server, run:
+- Node.js 18+
+- A [GitHub OAuth App](https://github.com/settings/developers) with callback URL `http://localhost:3000/auth/callback`
 
-```bash
-ng serve
-```
+## Setup
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+1. Create a GitHub OAuth App:
+   - Go to **GitHub → Settings → Developer settings → OAuth Apps → New OAuth App**
+   - **Application name:** DevFinder (or anything you like)
+   - **Homepage URL:** `http://localhost:4200`
+   - **Authorization callback URL:** `http://localhost:3000/auth/callback`
+   - Click **Register application**
+   - Copy the **Client ID**
+   - Click **Generate a new client secret** and copy it
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2. Install dependencies:
 
 ```bash
-ng generate --help
+npm install
+cd server && npm install
 ```
 
-## Building
+3. Configure GitHub OAuth credentials in `server/.env`:
 
-To build the project run:
+```
+GITHUB_CLIENT_ID=your_client_id
+GITHUB_CLIENT_SECRET=your_client_secret
+```
+
+## Running
+
+Start both the auth server and the Angular dev server:
 
 ```bash
-ng build
+# Terminal 1 — Auth server (port 3000)
+cd server && node index.js
+
+# Terminal 2 — Angular dev server (port 4200)
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Open `http://localhost:4200/`.
 
-## Running unit tests
+## Features
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- Search any GitHub user by username
+- Sign in with GitHub (OAuth)
+- Protected dashboard showing your top 10 public repos
+- Dark mode toggle
+- Responsive design
+
+## Build
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+## Tests
 
 ```bash
-ng e2e
+npm test
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
